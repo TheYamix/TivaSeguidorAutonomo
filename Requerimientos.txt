@@ -1,0 +1,19 @@
+1.Al iniciar el sistema todos los periféricos deben estar apagados.
+2.Este sistema será controlado por un periférico teclado, el cual estará conectado a la interfaz que se mostrará en ordenador , lo que nos permitirá obtener 
+información y controlar el movimiento del móvil.
+3.Dicha interfaz tendrá 3 opciones: ejecutar seguimiento de línea, mostrar datos de sensores y enviar comandos para que se maneje de forma autónoma.
+4.Inicialmente el usuario debe ingresar un comando para iniciar el funcionamiento de los periféricos. 
+5.Si el usuario selecciona la opción 1 con su teclado, se le enviará a un menú en el cual tendrá opciones para que el móvil pueda avanzar, retroceder, girar a la derecha, 
+girar a la izquierda.
+6.Para acabar el proceso anterior el usuario deberá ingresar en su teclado la letra ‘q’ para que regrese al menú principal.
+7.Para que avance el usuario deberá ingresar desde su teclado  w.
+8.Para que retroceda el usuario deberá ingresar desde su teclado  s.
+9.Para que gire a la derecha el usuario deberá ingresar desde su teclado d.
+10.Para que gire a la derecha el usuario deberá ingresar desde su teclado  ‘a’.
+11.Para regresar al menú principal se presionará la letra ‘P’ y adicionalmente los motores y sensores se apagan.
+12.Si el usuario selecciona la opción 2 con su teclado, se debe enviar la señal de inicio al robot móvil para que empiece a seguir la línea en caso 
+la hubiera y enviar una señal de confirmación al terminar con la tarea en el ordenador.
+13.Se colocará el móvil en la posición deseada y para iniciar el movimiento se deberá presionar ‘g’.
+14.Para terminar este proceso de seguir una línea, se deberá presionar la letra ‘q’ para que pare y  regrese al menú principal.
+15.Si el usuario selecciona la opción 3 con su teclado, el robot debe de enviar de forma continua los datos del sensor IMU y de los sensores ópticos, 
+dicha información se debe mostrar en la terminal del ordenador.Este sistema debe ser cíclico y no debe dejar de ejecutarse hasta que se decida terminar con la simulación. 

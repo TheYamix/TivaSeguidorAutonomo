@@ -1,0 +1,34 @@
+MODULO MAESTRO
+-La tarjeta de evalucion conectará mediante un cable usb al ordenador para asi cargar nuestro codigo en dicha tarjeta.
+-PD6 es un puerto GPIO que en este proyecto según la tabla puede ser y será configurado como entrada para usarse como puerto de comunicación serial 
+(uart) para la recepción(rx) de datos. Para este caso los datos recibidos serán proporcionados por el módulo bluetooth.
+-PD7 es un puerto GPIO que en este proyecto según la tabla puede ser y será configurado como salida para usarse como puerto de comunicación serial 
+(uart) para la recepción(rx) de datos. Para este caso los datos transmitidos serán proporcionados hacia el módulo bluetooth.
+
+MODULO ESCLAVO 
+-PD6 es un puerto GPIO que en este proyecto según la tabla puede ser y será configurado como entrada para usarse como puerto de comunicación serial (uart) 
+para la recepción(rx) de datos. Para este caso los datos recibidos serán proporcionados por el módulo bluetooth. Tener en cuenta que este PIN está bloqueado por lo que requerirá un desbloqueo.
+-PD7 es un puerto GPIO que en este proyecto según la tabla puede ser y será configurado como salida para usarse como puerto de comunicación serial (uart) 
+para la transmisión(rx) de datos.Para este caso los datos transmitidos serán proporcionados hacia el módulo bluetooth. Tener en cuenta que este PIN está bloqueado
+por lo que requerirá un desbloqueo.
+-PE2 es un puerto GPIO que en este proyecto según la tabla puede ser y será configurado como salida para usarse como una señal digital.Para este caso el microcontrolador
+mandará una señal(1 o 0) hacia el driver del motor para indicar el movimiento del motor 1(A).
+-PE3 es un puerto GPIO que en este proyecto según la tabla puede ser y será configurado como salida para usarse como una señal digital.Para este caso el microcontrolador 
+mandará una señal(1 o 0) hacia el driver del motor para indicar el movimiento del motor 1(A).
+-PC6 es un puerto GPIO que en este proyecto según la tabla puede ser y será configurado como salida para usarse como una señal digital.Para este caso el microcontrolador 
+mandará una señal(1 o 0) hacia el driver del motor para indicar el movimiento del motor 2(B).
+-PC7 es un puerto GPIO que en este proyecto según la tabla puede ser y será configurado como salida para usarse como una 	señal digital.Para este caso el microcontrolador 
+mandará una señal(1 o 0) hacia el driver del motor para indicar el movimiento del motor 2(B).
+-PB4 es un puerto GPIO que en este proyecto según la tabla puede ser y será configurado como salida para usarse como una señal PWM.Para este caso el microcontrolador 
+mandará una señal hacia el driver del motor para indicar la velocidad de giro del motor 1(A) y al motor 2(B).
+-PA6 es un puerto GPIO que en este proyecto según la tabla puede ser y será configurado para la conexión a una línea de pulsos de reloj que sincroniza el sistema entre sus periféricos. 
+Para este caso el sensor IMU poseerá un ciclo de reloj síncrono en el cual reciba y envíe información.
+-PA7 es un puerto GPIO que en este proyecto según la tabla puede ser y será configurado para la conexión a una línea de datos entre sus periféricos. 
+Para este caso el sensor IMU mandará información y recibirá instrucciones según el ciclo de reloj que se establezca.
+-PB5 es un puerto GPIO que en este proyecto según la tabla puede ser y será configurado como entrada para usarse como una señal digital.
+Para este caso el sensor infrarrojo mandará una señal(1 o 0) indicando cuánta luz blanca llegue al fototransistor.
+-PB6 es un puerto GPIO que en este proyecto según la tabla puede ser y será configurado como entrada para usarse como una señal digital.
+Para este caso el sensor infrarrojo mandará una señal(1 o 0) indicando cuánta luz blanca llegue al fototransistor.
+-PE4 es un puerto GPIO que en este proyecto según la tabla puede y será configurado como salida para usarse como una señal digital. 
+Para este caso el sensor infrarrojo mandará una señal(1 o 0). Su propósito es que este esté habilitado para que el driver de motor TB6612FNG pueda funcionar, es decir que la señal esté en 1.
+

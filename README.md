@@ -28,7 +28,7 @@ El microcontrolador que se usará es el EK-TM4C123GXL Evaluation board.
 
 > El diagrama de flujo esta en formato en PDF 
 Link:
-`<https://www.ti.com/tool/EK-TM4C123GXL](https://www.ti.com/tool/EK-TM4C123GXL>` 
+`<https://www.ti.com/tool/EK-TM4C123GXL>` 
 
 ------------
 

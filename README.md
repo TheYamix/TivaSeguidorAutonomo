@@ -6,7 +6,7 @@ Carro autonomo y seguidor de linea usando tiva c launchpad
 
 > Integrantes:
 - Yamil Ivan Nuñez Alvarez
-- Jose Velasquez VegasJose Velasquez Vegas
+- Jose Velasquez Vegas
 
 > Asesor:
 - Francisco Segovia

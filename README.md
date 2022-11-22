@@ -15,6 +15,7 @@ Carro autonomo y seguidor de linea usando tiva c launchpad
 ------------
 
 ###Descripcion del proyecto:
+
 El presente proyecto a implementar consiste en armar un vehículo controlado de manera remota que este tenga la función de seguir una línea negra y adicionalmente este se pueda manejar mediante comandos ingresados por el usuario. Para ello, este se ayudará de 2 sensores infrarrojos, 2 módulos bluetooth, cables para protoboard, una maqueta con 2 motores de 6v y un driver de motor.
 El programa para el funcionamiento del robot fue diseñado en lenguaje c++ y ejecutado por keil u vision.
 El microcontrolador que se usará es el EK-TM4C123GXL Evaluation board.
@@ -30,6 +31,7 @@ Link:
 
 
 ###Especificaciones de Componentes: 
+
 ![](https://i.postimg.cc/mZXD6X5P/hc-05.png)
 ![](https://i.postimg.cc/VsbWWVgF/tcrt5000.png)
 ![](https://i.postimg.cc/PrS7BcG8/tb66.png)
@@ -39,6 +41,7 @@ Link:
 
 
 ###Diseño de Hardware
+
 #####1. Diagrama de Bloques
 
 El proyecto consta de 2 microcontroladores TM4C123GH6PM. Uno de estos es conectado a una pc que funciona como periférico de entrada  para que mande las instrucciones al segundo, el cual recibirá las instrucciones y las realizará. Para la comunicación entre estos 2 microcontroladores se usarán 2 módulos bluetooth. Adicionalmente este segundo microcontrolador estará conectado a un sensor IMU que nos proporcionará información sobre la aceleración que tenga el vehículo, un par de sensores infrarrojos para analizar si se detectó luz o no  y un driver de motor dual para conectar los motores y regular su sentido de giro y revoluciones según el primer microcontrolador lo solicite.

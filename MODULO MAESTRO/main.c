@@ -1,8 +1,23 @@
+/****************************************************************************************/
+/****************************************************************************************/
+/***** PONTIFICIA UNIVERSIDAD CATÓLICA DEL PERÚ *****/
+/***** PONTIFICIA UNIVERSIDAD CATÓLICA DEL PERÚ *****/
+/***** FACULTAD DE CIENCIAS E INGENIERÍA *****/
+/***** SISTEMAS DIGITALES *****/
+/****************************************************************************************/
+/***** Proyecto: Robot Autonomo - Seguidor de Linea *****/
+/****************************************************************************************/
+/***** Microcontrolador: TM4C123GH6PM *****/
+/***** EvalBoard: Tiva C Series TM4C123G LaunchPad *****/
+/***** Autor: Nuñez Alvarez Yamil Ivan *****/
+/***** Fecha: Nobiembre 2022 *****/
+/***** *****/
+/****************************************************************************************/
 
 #include <stdint.h>
 #include "tm4c123gh6pm.h"
 
-
+//CONFIGURACION DEL UART0
 void ConfigUART0(void){
 	
 	//Se activa la señal de reloj del UART0
@@ -47,6 +62,7 @@ void ConfigUART0(void){
 	
 	UART0_CTL_R |= UART_CTL_UARTEN;
 }
+//ESPERA A RECIBIR UN CARACTER
 uint8_t rxUart(){
 	uint8_t car;
 	while ((UART0_FR_R & UART_FR_RXFE)!=0){}//mientras el fifo no este full
@@ -59,14 +75,14 @@ void txUart(uint8_t car){
 	while ((UART0_FR_R & UART_FR_TXFF)!=0){} //mientras el fifo este full
 	UART0_DR_R = car & 0xFF;
 }
-
+//TRANSMITE UNA CADENA
 void TxCadena( uint8_t Cadena[]){
 	uint8_t i;
 	for( i = 0; Cadena[i] != '\0'; i++ )
 	txUart(Cadena[i]);
 }
 
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//SE CONFIGURA EL UART2 PARA EL BLUETOOTH
 void ConfigUART2(void){
 	
 	//Se activa la señal de reloj del UART0
@@ -135,12 +151,14 @@ void TxCadena2( uint8_t Cadena[]){
 	for( i = 0; Cadena[i] != '\0'; i++ )
 	txUart2(Cadena[i]);
 }
-///////////////////////////////////////////////////////////////////////////////////
+//FUNCION PRINCIPAL
 void main(void){
+	//Se agrega la configuracion y variables iniciales
 	ConfigUART0();
 	ConfigUART2();
 	uint8_t car;
 	uint8_t centinela=0;
+	//Mensajes mostrados
 	uint8_t mensaje1[]="Bienvenido\n\r";
 	uint8_t mensaje2[]="\n\rSeleccione modo\n\r";
 	uint8_t mensaje3[]="\n\r1.Control Manual del Carro\n\r";
@@ -162,8 +180,10 @@ void main(void){
 	uint8_t mensaje19[]="\n\rPresione 'q' para salir \n\r";
 	uint8_t mensaje20[]="\n\rSe muestran los valores\n\r";
 	uint8_t mensaje21[]="\n\rSalio del modo acelerometro\n\r";
+	//mensaje inicial
 	TxCadena(mensaje1);
 	centinela=0;
+	//espera a que se ingrese un caracter valido
 	while(1){
 		if(centinela==0){
 			TxCadena(mensaje2);
@@ -171,14 +191,15 @@ void main(void){
 			TxCadena(mensaje4);
 			TxCadena(mensaje5);
 		}
+		//espera un caracter
 		car=rxUart();
 		txUart(car);
-		
+		//se valida
 		if(((car!='1') && (car!='2') && (car!='3'))){
 			TxCadena(mensaje6);
 			centinela=1;
 		}
-
+		//Si el caracter es 1 entra al modo 
 		if(car=='1'){
 			txUart2(car);
 			TxCadena(mensaje7);
@@ -197,16 +218,19 @@ void main(void){
 				txUart('\n');
 				txUart('\r');
 			}
+			//sale del proceso y muestra mensaje
 			TxCadena(mensaje15);
 			centinela=0;
 		}else{
+			//ingresa a modo seguidor de linea
 			if(car=='2'){
 				txUart2(car);
-				//comenzara el modo seguidos de linea
+				//se muestran mensajes de modo seguidos de linea
 				TxCadena(mensaje16);
 				TxCadena(mensaje17);
 				TxCadena(mensaje19);
 				car=' ';
+				//sigue la linea mientras se presione q
 				while(car!='q'){
 					car=rxUart();
 					txUart(car);
@@ -214,6 +238,7 @@ void main(void){
 					txUart('\n');
 					txUart('\r');
 				}
+				//sale del proceso y muestra mensaje 
 				TxCadena(mensaje18);
 				centinela=0;
 				

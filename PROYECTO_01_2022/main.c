@@ -5,13 +5,12 @@
 /***** FACULTAD DE CIENCIAS E INGENIERÍA *****/
 /***** SISTEMAS DIGITALES *****/
 /****************************************************************************************/
-/***** Tema: Comunicacion serial  *****/
-/***** Proyecto: IP07 *****/
+/***** Proyecto: Robot Autonomo - Seguidor de Linea *****/
 /****************************************************************************************/
 /***** Microcontrolador: TM4C123GH6PM *****/
 /***** EvalBoard: Tiva C Series TM4C123G LaunchPad *****/
 /***** Autor: Nuñez Alvarez Yamil Ivan *****/
-/***** Fecha: Octubre 2022 *****/
+/***** Fecha: Nobiembre 2022 *****/
 /***** *****/
 /****************************************************************************************/
 
@@ -250,19 +249,6 @@ void config_portE(void){
 	GPIO_PORTE_DEN_R |= 0x1C; //Se activan las funciones digitales
 	GPIO_PORTE_DATA_R &= ~(0x1C); 	
 }
-
-//void config_portA(void){
-//	//Se habilita la señal de reloj del Puerto A
-//	SYSCTL_RCGC2_R |= SYSCTL_RCGC2_GPIOA;
-//	//Espera a que se active
-//	while ((SYSCTL_PRGPIO_R & SYSCTL_PRGPIO_R0)==0){}
-
-//	GPIO_PORTA_DIR_R |= 0xC0; //PA6 Y PA7 como salidas
-//	GPIO_PORTA_AFSEL_R &= ~(0xC0); //Se desactivan las funciones alternas
-//	GPIO_PORTA_DEN_R |= 0xC0; //Se activan las funciones digitales
-//	GPIO_PORTA_DATA_R &= ~(0xC0); 
-//}
-////////////////////////////////////////////////////////////////////////////
 void config_I2C1 (void)
 {
 	uint32_t temp;
@@ -325,13 +311,12 @@ void config_portC(void){
 	GPIO_PORTC_DATA_R &= ~(0xC0); 
 			
 }
-
-//////////////////////////////////////////////////////////////
+//FUNCION PRINCIPAL
 int main(void){
+	//Se ingresan las configuraciones
 	config_portF();
 	ConfigUART2();
 	ConfigUART0();
-	//config_portA();
 	config_I2C0();
 	config_I2C1();
   Config_PortB_salidas(); 
@@ -342,6 +327,7 @@ int main(void){
 	uint32_t i;
 	uint8_t car,car1,car2,car3;
   uint8_t centinela=1,centinela2=1;
+	//Se inicia el timer
 	ConfiguraTimer_1ms();
 	//INICIALMENTE APAGAMOS LOS MOTORES
   GPIO_PORTE_DATA_R &= ~(0x0C);
@@ -350,14 +336,15 @@ int main(void){
 	//Ponemos a 1 el PE4, que enviara un 1 logico hacia el STBY del driver de motor
 	GPIO_PORTE_DATA_R |=(0x10);	
 	while(1){
+		//Reinicio de variables iniciales
 		car='0';
 		car1='0';
 		car2='0';
 		car3='0';
-		//Cada vez que recibamos un caracter, encenderemos un led como indicador de esto(led verde)
-	 //for(i=0;i<300;i++){}
+	 //se espera que un caracter llegue desde el otro dispositivo
+	 //mediante bluetooth
 	 car=rxUart2();
-	 //car1=car;
+	 //Si el caracter recibido es 1 se ejecutara lo correspondiente al modo autonomo
 	 if(car=='1'){
 		 while(car!='q'){
 			 //Cada vez que recibamos un caracter, encenderemos un led como indicador de esto(led verde)
@@ -370,7 +357,7 @@ int main(void){
 					 //apago los motores
 					 GPIO_PORTE_DATA_R &= ~(0x0C);//MOTOR 1
 					 GPIO_PORTC_DATA_R &= ~(0xC0);//MOTOR 2
-					 //genera giro hacia adelante
+					 //Motor derecho e izquierdo hacia adelante
 					 GPIO_PORTE_DATA_R |=(0x08); //AIN 1
 					 GPIO_PORTE_DATA_R &= ~(0x04);// AIN 2
 					 GPIO_PORTC_DATA_R |=(0x80);// BIN 1
@@ -382,19 +369,20 @@ int main(void){
 					 //apago los motores
 					 GPIO_PORTE_DATA_R &= ~(0x0C);//MOTOR 1
 					 GPIO_PORTC_DATA_R &= ~(0xC0);//MOTOR 2
-					//genera giro hacia atras
+					 //Motor derecho e izquierdo hacia atras
 					 GPIO_PORTE_DATA_R &= ~(0x08);//AIN 1
 					 GPIO_PORTE_DATA_R |=(0x04);// AIN 2
 					 GPIO_PORTC_DATA_R &= ~(0x80);// BIN 1
 					 GPIO_PORTC_DATA_R |=(0x40);// BIN 2
-					 
 					 break;
 				 case 'd':
+						 //giro hacia la derecha
 						 //apago los motores
 						 GPIO_PORTE_DATA_R &= ~(0x0C);//MOTOR 1
 						 GPIO_PORTC_DATA_R &= ~(0xC0);//MOTOR 2
-						 //giro hacia la derecha cuando va hacia adelante
+						 //Se reinicia el contador del timer
 						 contador=1;
+						 //Un giro de aproximadamente 15 grados 
 						 while(contador<150){
 							 GPIO_PORTE_DATA_R &= ~(0x08); //AIN 1
 							 GPIO_PORTE_DATA_R |=(0x04);// AIN 2
@@ -406,11 +394,13 @@ int main(void){
 						 GPIO_PORTC_DATA_R &= ~(0xC0);//MOTOR 2
 						 break;
 				 case 'a':
+						 //giro a a izquierda
 						 //apago los motores
 						 GPIO_PORTE_DATA_R &= ~(0x0C);//MOTOR 1
 						 GPIO_PORTC_DATA_R &= ~(0xC0);//MOTOR 2
-						 //giro hacia la izquierda cuando va hacia adelante
+						 //Se reinicia el contador del timer
 						 contador=1;
+						 //Un giro de aproximadamente 15 grados 
 						 while(contador<150){
 							 GPIO_PORTE_DATA_R |=(0x08); //AIN 1
 							 GPIO_PORTE_DATA_R &= ~(0x04);// AIN 2
@@ -430,24 +420,30 @@ int main(void){
 				}
 			 
 			}
+		  //Al presionar q se apagan los motores
 			GPIO_PORTE_DATA_R &= ~(0x0C);//MOTOR 1
 			GPIO_PORTC_DATA_R &= ~(0xC0);//MOTOR 2
 			
 		}else{
+			//Ingresa a modo seguidor de linea
 			if(car=='2'){
+				//espera un caracter de confirmacion para iniciar 
 				car=rxUart2();
+				//el caracter g indica el inicio del seguimiento
 				if(car=='g'){
 					while(centinela2){
 						//sensor conectado al PB5 - derecho
 						if((GPIO_PORTB_DATA_R & 0x20)==0x20){
 							//detecta linea negra
 							contador=1;
+							//gira aproximadamente 5 grados
 							while(contador<50){
 								 GPIO_PORTE_DATA_R &= ~(0x08); //AIN 1
 								 GPIO_PORTE_DATA_R |=(0x04);// AIN 2
 								 GPIO_PORTC_DATA_R |=(0x80);// BIN 1
 								 GPIO_PORTC_DATA_R &= ~(0x40);// BIN 2
 							 }
+							//sigue avanzando hacia adelante
 							 GPIO_PORTE_DATA_R |=(0x08); //AIN 1
 							 GPIO_PORTE_DATA_R &= ~(0x04);// AIN 2
 							 GPIO_PORTC_DATA_R |=(0x80);// BIN 1
@@ -455,27 +451,31 @@ int main(void){
 						}else{
 							//sensor conectado al PB6 - izquierdo
 							if((GPIO_PORTB_DATA_R & 0x40)==0x40){
+								//detecta linea negra
 								contador=1;
+								//gira aproximadamente 5 grados
 								while(contador<50){
 									 GPIO_PORTE_DATA_R |=(0x08); //AIN 1
 									 GPIO_PORTE_DATA_R &= ~(0x04);// AIN 2
 									 GPIO_PORTC_DATA_R &= ~(0x80);// BIN 1
 									 GPIO_PORTC_DATA_R |=(0x40);// BIN 2
 								}
+								//sigue avanzando hacia adelante
 								GPIO_PORTE_DATA_R |=(0x08); //AIN 1
 							  GPIO_PORTE_DATA_R &= ~(0x04);// AIN 2
 							  GPIO_PORTC_DATA_R |=(0x80);// BIN 1
 							  GPIO_PORTC_DATA_R &= ~(0x40);// BIN 2
 								
 							}else{
+								//Avanza hasta que detecte algo
 								GPIO_PORTE_DATA_R |=(0x08); //AIN 1
 								GPIO_PORTE_DATA_R &= ~(0x04);// AIN 2
 								GPIO_PORTC_DATA_R |=(0x80);// BIN 1
 								GPIO_PORTC_DATA_R &= ~(0x40);// BIN 2
 							}
-							//detecta luz
-							
 						}
+						//espera a que se reciba un caracter en especifico y lo verifica
+						//no se queda esperando, solo pasa 
 						car=rxUart2_espera();
 						if(car=='q'){
 							centinela2=0;

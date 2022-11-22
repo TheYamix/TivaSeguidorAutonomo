@@ -14,7 +14,7 @@ Carro autonomo y seguidor de linea usando tiva c launchpad
 
 ------------
 
-###Descripcion del proyecto:
+### Descripcion del proyecto:
 
 El presente proyecto a implementar consiste en armar un vehículo controlado de manera remota que este tenga la función de seguir una línea negra y adicionalmente este se pueda manejar mediante comandos ingresados por el usuario. Para ello, este se ayudará de 2 sensores infrarrojos, 2 módulos bluetooth, cables para protoboard, una maqueta con 2 motores de 6v y un driver de motor.
 El programa para el funcionamiento del robot fue diseñado en lenguaje c++ y ejecutado por keil u vision.
@@ -30,7 +30,7 @@ Link:
 ------------
 
 
-###Especificaciones de Componentes: 
+### Especificaciones de Componentes: 
 
 ![](https://i.postimg.cc/mZXD6X5P/hc-05.png)
 ![](https://i.postimg.cc/VsbWWVgF/tcrt5000.png)
@@ -40,9 +40,9 @@ Link:
 ------------
 
 
-###Diseño de Hardware
+### Diseño de Hardware
 
-#####1. Diagrama de Bloques
+##### 1. Diagrama de Bloques
 
 El proyecto consta de 2 microcontroladores TM4C123GH6PM. Uno de estos es conectado a una pc que funciona como periférico de entrada  para que mande las instrucciones al segundo, el cual recibirá las instrucciones y las realizará. Para la comunicación entre estos 2 microcontroladores se usarán 2 módulos bluetooth. Adicionalmente este segundo microcontrolador estará conectado a un sensor IMU que nos proporcionará información sobre la aceleración que tenga el vehículo, un par de sensores infrarrojos para analizar si se detectó luz o no  y un driver de motor dual para conectar los motores y regular su sentido de giro y revoluciones según el primer microcontrolador lo solicite.
 Usaremos los puertos de proposito general para conectar los componentes. Adicionalmente para la comunicación entre ellos se usarán los protocolos UART y para controlar las revoluciones de giro del motor se configurará el Timer y PWM.
@@ -52,7 +52,7 @@ Usaremos los puertos de proposito general para conectar los componentes. Adicion
 ------------
 
 
-#####2. Diagrama de Esquematico
+##### 2. Diagrama de Esquematico
 
 - Modulo Maestro
 
@@ -69,7 +69,7 @@ Usaremos los puertos de proposito general para conectar los componentes. Adicion
 > Las conexiones están explicadas en Información sobre conexiones.txt 
 (subido al repositorio)
 
-#####3.Diagrama de Flujo de Datos
+##### 3.Diagrama de Flujo de Datos
 
 ![](https://i.postimg.cc/W12pst1f/flujo-de-datos-1.png)
 
@@ -78,7 +78,7 @@ Usaremos los puertos de proposito general para conectar los componentes. Adicion
 
 ------------
 
-###Observaciones y/o Recomendaciones:
+### Observaciones y/o Recomendaciones:
 
 1. Se recomienda preparar previamente un cronograma de tareas mediante un diagrama de gantt y/o plataformas digitales como por ejemplo: Trello.
 2.  Al momento de configurar el  módulo bluetooth, tuvimos inconvenientes para hacer la vinculación entre bluetooth maestro y esclavo mediante el KEIL, es por ello que se recomienda hacer la vinculación y las diferentes configuraciones usando un arduino, en nuestro caso usamos un arduino UNO.
@@ -91,7 +91,7 @@ Usaremos los puertos de proposito general para conectar los componentes. Adicion
 ------------
 
 
-###Conclusiones:
+### Conclusiones:
 - Las restricciones para este proyecto son las siguientes: -Restricciones propias del curso: Empleo del microcontrolador TM4C123GH6PM.
 - Uso de Lenguaje C para la programación Entorno Keil uVision
 - Restricciones específicas del proyecto: Empleo de interfaces UART, TIMER para la creación de señales PWM las cuales nos ayudarán con el ancho de banda de la señal.
@@ -101,7 +101,7 @@ Usaremos los puertos de proposito general para conectar los componentes. Adicion
 ------------
 
 
-###Resultados:
+### Resultados:
 
 Fotos de conexiones y ensamblado
 
@@ -114,4 +114,4 @@ Fotos de simulacion del programa en PuTTY
 ![](https://i.postimg.cc/Z5gFyWDV/Whats-App-Image-2022-11-21-at-6-59-40-PM-1.jpg)
 ![](https://i.postimg.cc/jj766RpK/Whats-App-Image-2022-11-21-at-6-59-41-PM.jpg)
 
-###End
+### End

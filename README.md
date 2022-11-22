@@ -21,9 +21,12 @@ El programa para el funcionamiento del robot fue diseñado en lenguaje c++ y eje
 El microcontrolador que se usará es el EK-TM4C123GXL Evaluation board.
 
 > El archivo Modulo Maestro contiene el modulo del Maestro
+
 > El archivo PROYECTO_01_2022 contiene el modulo del Esclavo
+
 > Los requerimientos se podrán observar en requerimientos.txt (subido al repositorio)
-> El diagrama de flujo esta en formato PDF en 
+
+> El diagrama de flujo esta en formato en PDF 
 Link:
 `<https://www.ti.com/tool/EK-TM4C123GXL](https://www.ti.com/tool/EK-TM4C123GXL>` 
 
